@@ -5,4 +5,6 @@ It displays a 3D world where you can map your longitude/latitude data, as well a
 
 This explanation will be updated as I update the code.
 
+![viz](http://s21.postimg.org/z2kkoc7uf/Screen1.png)
+
 For the moment, let's viz :) !
