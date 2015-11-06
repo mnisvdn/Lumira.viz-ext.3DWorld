@@ -1,4 +1,8 @@
-	define("vdn_viz_ext_3dworld-src/js/core/controller-module", 
+/*!
+ * @author Vincent Dechandon <https://github.com/idawave>
+ * Original idea of "3D World" with d3.js by Derek Watkins <https://github.com/dwtkns>
+ */
+define("vdn_viz_ext_3dworld-src/js/core/controller-module", 
 	[
 		"vdn_viz_ext_3dworld-src/js/utils/path-creator-module",
 		"vdn_viz_ext_3dworld-src/js/utils/color-module",
@@ -94,7 +98,7 @@
 		/*
 			Factory
 		*/
-		return function Core(svg, world, container) {
+		return function Core(svg, world) {
 			/*
 				Private members
 			*/
