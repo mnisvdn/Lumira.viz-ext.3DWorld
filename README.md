@@ -1,3 +1,3 @@
-# Lumira.viz-ext.3D_World
+# Lumira.viz-ext.3DWorld
 
 Coming soon :-) !
