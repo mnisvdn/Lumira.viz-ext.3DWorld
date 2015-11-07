@@ -14,7 +14,7 @@ define("vdn_viz_ext_3dworld-src/js/flow", [ "vdn_viz_ext_3dworld-src/js/module" 
 		/*Feeds Definition*/
 		var LngLatFeed = {
 		    "id": "vdn.viz.ext.module.3DWorldModule.DS1", // Can't change the id from DS1 or Lumira fails to load the extension (cannot read property length of undefined)
-		    "name": "Lon/Lat Dimensions",
+		    "name": "Lng/Lat",
 		    "type": "Dimension",
 		    "min": 0,
 		    "max": 2,
