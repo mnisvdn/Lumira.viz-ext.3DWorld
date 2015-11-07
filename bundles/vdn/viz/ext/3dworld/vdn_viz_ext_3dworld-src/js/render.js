@@ -14,11 +14,11 @@ define(
 			// Private method that sets up the 3D world and map and style data on it
 			function createViz(_world) {
 				var _3dWorld_ = _3dWorld(container, _world);
-				if (measures[0] && measures[0] !== "Measure") { // Even if no measure has been set Lumira sends a "fake" measure called "Measure" // I'm not sure why but it looks like a bug to me
-					_3dWorld_.setSizeField(measures[0]);
+				if (sizeFeed) { // Even if no measure has been set Lumira sends a "fake" measure called "Measure" // I'm not sure why but it looks like a bug to me
+					_3dWorld_.setSizeField(sizeFeed);
 				}
-				if (measures[1]) {
-					_3dWorld_.setColorField(measures[1]);
+				if (colorFeed) {
+					_3dWorld_.setColorField(colorFeed);
 				}
 				if (dimensions[0] && dimensions[1]) {
 					_3dWorld_.setData(data);
@@ -32,7 +32,19 @@ define(
 			var width      = this.width(),
 				height     = this.height(),
 				dimensions = data.meta.dimensions(), // Array of dimensions from user input
-				measures   = data.meta.measures();   // Array of measures from user input
+				measures   = data.meta.measures(),
+				colorFeed  = data.meta._feeds_("Color"),	
+				sizeFeed   = data.meta._feeds_("Size");
+				
+			if (colorFeed && sizeFeed) {
+				sizeFeed  = measures[0];
+				colorFeed = measures[1];
+			} else if (colorFeed) {
+				colorFeed = measures[0];
+			} else if (sizeFeed) {
+				sizeFeed = measures[0];
+			}
+				
 				
 			container
 				.attr("width", width)
@@ -41,7 +53,7 @@ define(
 				.remove();      // This could be improved by caching svg elements and only updates features above them
 
 			// @todo : Can the data mapping be done in the mapper function in dataMapping.js?
-			data = GeoJsonFormatterUtil(data, dimensions, measures); // Format JavaScript objects into GeoJSON Feature Collection
+			data = GeoJsonFormatterUtil(data, dimensions, [sizeFeed, colorFeed]); // Format JavaScript objects into GeoJSON Feature Collection
 
 			// Load topojson world to map it to the main globe
 			$.getJSON(require.toUrl("vdn_viz_ext_3dworld-src/resources/data/world-110m.topojson"), function(worldAsJson) {

@@ -124,6 +124,9 @@ define("vdn_viz_ext_3dworld-src/js/utils/util", [], function(){
                             return tmp;
                         }(meta.dimSets))
                     },
+					feeds : function() {
+						
+					},
                     measures : function(i, j) {
                         if(arguments.length === 0) {
                             var ret = [];
@@ -138,8 +141,7 @@ define("vdn_viz_ext_3dworld-src/js/utils/util", [], function(){
                                 i = this._mgMap[i];  
                             }
                             if(!this._meta.measureSets[i]) {
-                                //throw "MeasureGroup \"" + i + "\" not found!";
-                                return []; // GGO: avoid crash when no measure
+                                return [];
                             }
                             return this._meta.measureSets[i];
                         } else {
@@ -160,8 +162,6 @@ define("vdn_viz_ext_3dworld-src/js/utils/util", [], function(){
                                 i = this._dimMap[i];  
                             }
                             if(!this._meta.dimSets[i]) {
-                                //throw "Dimension Set \"" + i + "\" not found!";
-                                console.log("Dimension Set \"" + i + "\" not found!"); // GGO: support missing dim
                                 return [];
                             }
                             return this._meta.dimSets[i];
@@ -200,6 +200,26 @@ define("vdn_viz_ext_3dworld-src/js/utils/util", [], function(){
                 return this._ctx[col][dataIdx];
             };
         },
+		
+		/*
+			Custom function to retrieves feed ids currently in use
+		*/
+		_setMetaFeeds : function(feeds) {
+			var ids = {}, 
+				len = feeds.length,
+				_id;
+			for (var i = 0; i < len; ++i) {
+				_id = feeds[i].feedId.split(".");
+				_id = _id[_id.length - 1];
+				ids[_id] = _id;
+			}
+			return function(id) {
+				if (id) {
+					return ids[id];
+				}
+				return ids;
+			};	
+		},
 
         _cross : function(data) {
             var ret =  this._toFlattenTable(data);
@@ -207,6 +227,7 @@ define("vdn_viz_ext_3dworld-src/js/utils/util", [], function(){
                 return null;
             }
             ret.meta = this._parseMeta(ret.meta);
+			ret.meta._feeds_ = this._setMetaFeeds(data.feeding);
             //Extract data context for MultiAxisDataAdapter
             if(data.getAnalysisAxisDataByIdx) {
                 this._extractCtx(ret.meta, data);

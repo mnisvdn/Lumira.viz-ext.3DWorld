@@ -27,16 +27,27 @@ define("vdn_viz_ext_3dworld-src/js/flow", [ "vdn_viz_ext_3dworld-src/js/module" 
 		};
 		element.addFeed(ds1);
 		
-		//ms1: Margin, Quantity sold, Sales revenue
+
 		var ms1 = {
-		    "id": "vdn.viz.ext.module.3DWorldModule.MS1",
-		    "name": "Size/Color Measures",
+		    "id": "vdn.viz.ext.module.3DWorldModule.Size",
+		    "name": "Size",
 		    "type": "Measure",
 		    "min": 0,
-		    "max": 2,
+		    "max": 1,
 		    "mgIndex": 1
 		};
 		element.addFeed(ms1);
+		
+
+		var ms2 = {
+		    "id": "vdn.viz.ext.module.3DWorldModule.Color",
+		    "name": "Color",
+		    "type": "Measure",
+		    "min": 0,
+		    "max": 1,
+		    "mgIndex": 2
+		};
+		element.addFeed(ms2);
 		
 		flow.addElement({
 			"element":element,
