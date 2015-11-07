@@ -206,12 +206,14 @@ define("vdn_viz_ext_3dworld-src/js/utils/util", [], function(){
 		*/
 		_setMetaFeeds : function(feeds) {
 			var ids = {}, 
-				len = feeds.length,
-				_id;
-			for (var i = 0; i < len; ++i) {
-				_id = feeds[i].feedId.split(".");
-				_id = _id[_id.length - 1];
-				ids[_id] = _id;
+				len, _id;
+			if (feeds && feeds.length) {
+				len = feeds.length;
+				for (var i = 0; i < len; ++i) {
+					_id = feeds[i].feedId.split(".");
+					_id = _id[_id.length - 1];
+					ids[_id] = _id;
+				}
 			}
 			return function(id) {
 				if (id) {
