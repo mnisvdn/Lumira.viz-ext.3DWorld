@@ -1,6 +1,4 @@
-/*<<dependency*/
 define("vdn_viz_ext_3dworld-src/js/flow", [ "vdn_viz_ext_3dworld-src/js/module" ], function(moduleFunc) {
-/*dependency>>*/
     var flowRegisterFunc = function(){
 		var flow = sap.viz.extapi.Flow.createFlow({
 			id : "vdn.viz.ext.3dworld",
@@ -10,13 +8,12 @@ define("vdn_viz_ext_3dworld-src/js/flow", [ "vdn_viz_ext_3dworld-src/js/module" 
 		});
 		var element  = sap.viz.extapi.Flow.createElement({
 			id : "sap.viz.ext.module.3DWorldModule",
-			name : "Hello World Module"
+			name : "3D World Module"
 		});
 		element.implement("sap.viz.elements.common.BaseGraphic", moduleFunc);
 		/*Feeds Definition*/
-		//ds1: City, Year
-		var ds1 = {
-		    "id": "vdn.viz.ext.module.3DWorldModule.DS1",
+		var LngLatFeed = {
+		    "id": "vdn.viz.ext.module.3DWorldModule.DS1", // Can't change the id from DS1 or Lumira fails to load the extension (cannot read property length of undefined)
 		    "name": "Lon/Lat Dimensions",
 		    "type": "Dimension",
 		    "min": 0,
@@ -25,21 +22,19 @@ define("vdn_viz_ext_3dworld-src/js/flow", [ "vdn_viz_ext_3dworld-src/js/module" 
 		    "minStackedDims": 1,
 		    "maxStackedDims": Infinity
 		};
-		element.addFeed(ds1);
+		element.addFeed(LngLatFeed);
 		
-
-		var ms1 = {
-		    "id": "vdn.viz.ext.module.3DWorldModule.Size",
+		var SizeFeed = {
+		    "id": "vdn.viz.ext.module.3DWorldModule.Size", // But still can change ids of measures... Why?
 		    "name": "Size",
 		    "type": "Measure",
 		    "min": 0,
 		    "max": 1,
 		    "mgIndex": 1
 		};
-		element.addFeed(ms1);
+		element.addFeed(SizeFeed);
 		
-
-		var ms2 = {
+		var ColorFeed = {
 		    "id": "vdn.viz.ext.module.3DWorldModule.Color",
 		    "name": "Color",
 		    "type": "Measure",
@@ -47,7 +42,7 @@ define("vdn_viz_ext_3dworld-src/js/flow", [ "vdn_viz_ext_3dworld-src/js/module" 
 		    "max": 1,
 		    "mgIndex": 2
 		};
-		element.addFeed(ms2);
+		element.addFeed(ColorFeed);
 		
 		flow.addElement({
 			"element":element,
