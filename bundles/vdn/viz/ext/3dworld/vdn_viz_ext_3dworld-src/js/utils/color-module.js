@@ -3,8 +3,8 @@
  */
 define("vdn_viz_ext_3dworld-src/js/utils/color-module", [], function() {
 	var DEFAULT_START_COLOR = {
-		r : 0,
-		g : 204,
+		r : 255,
+		g : 255,
 		b : 0
 	},
 		DEFAULT_END_COLOR   = {
