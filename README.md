@@ -8,3 +8,7 @@ This explanation will be updated as I update the code.
 ![viz](http://s7.postimg.org/g844to44r/Screen1.png)
 
 For the moment, let's viz :) !
+
+**Current limitations**
+ - Even if technically the globe supports an infinity of points, the performance starts to decrease above 250/300 points. The performance decreases even faster as you put several times the extension in a Lumira Story.
+ - Adding more than one time this extension per page in a Lumira story lead to an unexpected bahviour : only the last globe added can be rotated. I've found the reason as well as a fix, but I'm not happy with it for the moment so I'll let it as a limitation
