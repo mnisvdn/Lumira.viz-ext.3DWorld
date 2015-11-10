@@ -1,6 +1,7 @@
 /*!
  * @author Vincent Dechandon <https://github.com/idawave>
- * Original idea of "3D World" with d3.js by Derek Watkins <https://github.com/dwtkns>
+ * Original idea of "3D World" with d3.js by Derek Watkins <https://github.com/dwtkns> and of course Mike Bostock <https://github.com/mbostock>
+ * Link to an example of what inspired me <http://bl.ocks.org/mbostock/3795040>
  */
 define("vdn_viz_ext_3dworld-src/js/core/controller-module", 
 	[
@@ -14,59 +15,71 @@ define("vdn_viz_ext_3dworld-src/js/core/controller-module",
 	function(PathFactory, ColorFactory, SizeFactory, Projection, EventFactory) {
 		
 		/*
-			Create static elements
+			Create elements
 		*/
 		function _CreateGlobe(svg, width, height, projection, world, path) {
-			
 
-			
-			var ocean_fill = svg.append("defs").append("radialGradient")
-					.attr("id", "ocean_fill")
+			var Ocean = svg
+					.append("defs")
+					.append("radialGradient")
+					.attr("id", "Ocean")
 					.attr("cx", "75%")
 					.attr("cy", "25%");
-				  ocean_fill.append("stop").attr("offset", "5%").attr("stop-color", "#73d2e0");
-				  ocean_fill.append("stop").attr("offset", "100%").attr("stop-color", "#a5d5cb");
+				  Ocean.append("stop").attr("offset", "5%").attr("stop-color", "#73d2e0");
+				  Ocean.append("stop").attr("offset", "100%").attr("stop-color", "#a5d5cb");
 
-			  var globe_highlight = svg.append("defs").append("radialGradient")
-					.attr("id", "globe_highlight")
+			var GlobeGlow = svg
+					.append("defs")
+					.append("radialGradient")
+					.attr("id", "GlobeGlow")
 					.attr("cx", "75%")
 					.attr("cy", "25%");
-				  globe_highlight.append("stop")
+				  GlobeGlow.append("stop")
 					.attr("offset", "5%").attr("stop-color", "#ffd")
 					.attr("stop-opacity","0.6");
-				  globe_highlight.append("stop")
+				  GlobeGlow.append("stop")
 					.attr("offset", "100%").attr("stop-color", "#ba9")
 					.attr("stop-opacity","0.2");
 
-			  var globe_shading = svg.append("defs").append("radialGradient")
-					.attr("id", "globe_shading")
+			var GlobeReflection = svg
+					.append("defs")
+					.append("radialGradient")
+					.attr("id", "GlobeReflection")
 					.attr("cx", "55%")
 					.attr("cy", "45%");
-				  globe_shading.append("stop")
+				  GlobeReflection
+					.append("stop")
 					.attr("offset","30%").attr("stop-color", "#fff")
 					.attr("stop-opacity","0")
-				  globe_shading.append("stop")
+				  GlobeReflection
+					.append("stop")
 					.attr("offset","100%").attr("stop-color", "#505962")
 					.attr("stop-opacity","0.3")
 
-			  var drop_shadow = svg.append("defs").append("radialGradient")
-					.attr("id", "drop_shadow")
+			var GlobeShadow = svg
+					.append("defs")
+					.append("radialGradient")
+					.attr("id", "GlobeShadow")
 					.attr("cx", "50%")
 					.attr("cy", "50%");
-				  drop_shadow.append("stop")
-					.attr("offset","20%").attr("stop-color", "#000")
+				  GlobeShadow
+					.append("stop")
+					.attr("offset","20%")
+					.attr("stop-color", "#000")
 					.attr("stop-opacity",".3")
-				  drop_shadow.append("stop")
+				  GlobeShadow
+					.append("stop")
 					.attr("offset","100%").attr("stop-color", "#000")
 					.attr("stop-opacity","0")  
 
 					
 			  svg.append("ellipse")
-				.attr("cx", width/2).attr("cy", height + (height/20))
+				.attr("cx", width/2)
+				.attr("cy", height + (height/20))
 				.attr("rx", projection.scale())
 				.attr("ry", projection.scale()*.1)
 				.attr("class", "noclicks")
-				.style("fill", "url(#drop_shadow)");
+				.style("fill", "url(#GlobeShadow)");
 
 				
 
@@ -74,7 +87,7 @@ define("vdn_viz_ext_3dworld-src/js/core/controller-module",
 				.attr("cx", width / 2).attr("cy", height / 2)
 				.attr("r", projection.scale())
 				.attr("class", "noclicks")
-				.style("fill", "url(#ocean_fill)");
+				.style("fill", "url(#Ocean)");
 			  
 			  svg.append("path")
 				.datum(topojson.object(world, world.objects.land))
@@ -85,13 +98,13 @@ define("vdn_viz_ext_3dworld-src/js/core/controller-module",
 				.attr("cx", width / 2).attr("cy", height / 2)
 				.attr("r", projection.scale())
 				.attr("class","noclicks")
-				.style("fill", "url(#globe_highlight)");
+				.style("fill", "url(#GlobeGlow)");
 
 			  svg.append("circle")
 				.attr("cx", width / 2).attr("cy", height / 2)
 				.attr("r", projection.scale())
 				.attr("class","noclicks")
-				.style("fill", "url(#globe_shading)");
+				.style("fill", "url(#GlobeReflection)");
 		}
 		
 		
