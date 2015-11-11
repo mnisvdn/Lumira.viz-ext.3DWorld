@@ -107,6 +107,10 @@ define("vdn_viz_ext_3dworld-src/js/core/controller-module",
 				.style("fill", "url(#GlobeReflection)");
 		}
 		
+		function getLumiraId(el) { // TODO : move this to a utility file
+			return $(el).closest("div").attr("id");
+		}
+		
 		
 		/*
 			Factory
@@ -197,14 +201,17 @@ define("vdn_viz_ext_3dworld-src/js/core/controller-module",
 			}
 			
 			function _createControls(fn) {
+				
+				var eventNamespace = getLumiraId(svg[0]);
+				
 				d3.select(window)
-					.on("mousemove", Event.mousemove.bind(null, fn))
-					.on("mouseup", Event.mouseup.bind(null, fn));
+					.on("mousemove." + eventNamespace, Event.mousemove.bind(null, fn))
+					.on("mouseup." + eventNamespace, Event.mouseup.bind(null, fn));
 					
 
 				//svg.on("mousedown", Event.mousedown, true);
 				
-				d3.select("svg.v-m-root").on("mousedown", Event.mousedown);
+				d3.select("div#" + eventNamespace + " svg.v-m-root").on("mousedown." + eventNamespace, Event.mousedown);
 
 			}
 			
@@ -279,4 +286,5 @@ define("vdn_viz_ext_3dworld-src/js/core/controller-module",
 			return core(); // return the factory
 		}
 			
-	});
+	}
+);
