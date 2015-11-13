@@ -1,24 +1,16 @@
-.land {
+.land { /* Class applied to the countries mapped on the globe */
   fill           : #FFFFFF;
-  stroke-opacity : 1;
 }
 
-.labels {
-    font    : 8px sans-serif;
-    fill    : black;
-    opacity : .5;
-    display : none;
-}
-
-.noclicks { 
-	pointer-events : none; 
-}
-
-.feature {  
+.feature {  /* Class applied to the points mapped on the globe */
   opacity        : .6;
   stroke         : white;
   stroke-width   : 1.1px;
   stroke-opacity : .4;
 }
 
-  
+.noclicks { /* Utility class to prevent handlers from triggering on an element */
+	pointer-events : none; 
+}
+
+
