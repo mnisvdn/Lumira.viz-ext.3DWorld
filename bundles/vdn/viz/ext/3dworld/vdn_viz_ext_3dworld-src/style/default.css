@@ -1,5 +1,5 @@
 .land { /* Class applied to the countries mapped on the globe */
-  fill           : #FFFFFF;
+  fill : #FFFFFF;
 }
 
 .feature {  /* Class applied to the points mapped on the globe */
