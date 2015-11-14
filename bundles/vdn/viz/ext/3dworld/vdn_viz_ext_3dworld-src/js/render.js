@@ -10,6 +10,16 @@ define(
 		"vdn_viz_ext_3dworld-src/js/utils/data-to-geojson"
 	], 
 	function(require, _3dWorld, GeoJsonFormatterUtil) {
+		
+		// Private object accessible through closure
+		// That is used to store reusable elements instead of creating/requesting them
+		// At each _render call
+		var Cache = {};
+		
+		/*
+			data {Array} An array of JS objects of business data
+			container {DOM} The DOM element (<g> tag) where we should append our own elements
+		*/
 		return function _render(data, container) {
 			// Private method that sets up the 3D world and map and style data on it
 			function createViz(_world) {
@@ -29,12 +39,12 @@ define(
 				}
 			}
 
-			var width      = this.width(),
-				height     = this.height(),
-				dimensions = data.meta.dimensions(), // Array of dimensions from user input
-				measures   = data.meta.measures(),
-				colorFeed  = data.meta._feeds_("Color"),	
-				sizeFeed   = data.meta._feeds_("Size");
+			var width      = this.width(),  // container width
+				height     = this.height(), // container height
+				dimensions = data.meta.dimensions(), // Array of dimensions from feeds
+				measures   = data.meta.measures(), // Array of measures from feeds
+				sizeFeed   = data.meta.isFeedDefined("Size"), // Is the Size feed used?
+				colorFeed  = data.meta.isFeedDefined("Color"); // Is the Color feed used?
 				
 			if (colorFeed && sizeFeed) {
 				sizeFeed  = measures[0];
@@ -45,7 +55,6 @@ define(
 				sizeFeed = measures[0];
 			}
 				
-				
 			container
 				.attr("width", width)
 				.attr("height", height)
@@ -55,10 +64,15 @@ define(
 			// @todo : Can the data mapping be done in the mapper function in dataMapping.js?
 			data = GeoJsonFormatterUtil(data, dimensions, [sizeFeed, colorFeed]); // Format JavaScript objects into GeoJSON Feature Collection
 
-			// Load topojson world to map it to the main globe
-			$.getJSON(require.toUrl("vdn_viz_ext_3dworld-src/resources/data/world-110m.topojson"), function(worldAsJson) {
-				createViz(worldAsJson);
-			});
+			if (Cache.WorldAsJson) {
+				createViz(Cache.WorldAsJson);
+			} else {
+				// Load topojson world to map it to the main globe
+				$.getJSON(require.toUrl("vdn_viz_ext_3dworld-src/resources/data/world-110m.topojson"), function(worldAsJson) {
+					Cache.WorldAsJson = worldAsJson;
+					createViz(worldAsJson);
+				});
+			}
 		};
 	}
 );

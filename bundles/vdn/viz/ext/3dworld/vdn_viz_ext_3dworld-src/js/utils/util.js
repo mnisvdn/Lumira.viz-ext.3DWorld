@@ -229,7 +229,7 @@ define("vdn_viz_ext_3dworld-src/js/utils/util", [], function(){
                 return null;
             }
             ret.meta = this._parseMeta(ret.meta);
-			ret.meta._feeds_ = this._setMetaFeeds(data.feeding);
+			ret.meta.isFeedDefined = this._setMetaFeeds(data.feeding);
             //Extract data context for MultiAxisDataAdapter
             if(data.getAnalysisAxisDataByIdx) {
                 this._extractCtx(ret.meta, data);
