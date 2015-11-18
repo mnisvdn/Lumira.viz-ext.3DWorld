@@ -1,5 +1,7 @@
 # Lumira.viz-ext.3DWorld
 
+**If you want to download a pre-built and ready to use extension, sneak into the ![build](/build) folder.**
+
 Hi everyone. This repository is a viz extension for SAP Lumira.
 It displays a 3D world where you can map your longitude/latitude data, as well as put two indicators on them (size/color).
 
