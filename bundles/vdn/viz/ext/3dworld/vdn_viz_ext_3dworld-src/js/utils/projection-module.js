@@ -12,7 +12,8 @@ define("vdn_viz_ext_3dworld-src/js/utils/projection-module", [], function() {
 				.orthographic()
 				.translate([width / 2, height / 2])
 				.clipAngle(90)
-				.scale(height/2 + (height/18));
+				.scale(height/2 + (height/18))
+				.rotate([90,-30]); // centered above US
 		
 	}		
 });
