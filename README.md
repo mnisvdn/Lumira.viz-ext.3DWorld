@@ -10,6 +10,8 @@ This explanation will be updated as I update the code.
 ![viz](http://s4.postimg.org/itkn96gtp/Screenshot07.png)
 
 For the moment, let's viz :) !
+**Update**
+- 11/19/2015 : Centered the globe above USA upon ask. Sneak the **3DWorld-master-CenteredAboveUSA** package in the **/build** folder.
 
 **Fix**
 - 11/11/2015 : Adding multiple times this extension in one story page now works as exepected
