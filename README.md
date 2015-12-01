@@ -12,6 +12,7 @@ This explanation will be updated as I update the code.
 For the moment, let's viz :) !
 
 **Update**
+- 12/01/2015 : Next feature to come is infowindow when hovering the points
 - 11/19/2015 : Centered the globe above USA upon ask. Sneak the **3DWorld-master-CenteredAboveUSA** package in the **/build** folder.
 
 **Fix**
