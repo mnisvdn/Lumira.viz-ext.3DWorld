@@ -1,5 +1,7 @@
 # Lumira.viz-ext.3DWorld
 
+## You can find this extension on the official **SAP Lumira Repository** on **GitHub**, right here: https://github.com/SAP/lumira-extension-viz/tree/master/3D_World
+
 If you want to download a **pre-built and ready-to-use extension**, sneak into the **/build** folder.
 Read the full article about this extension right there : http://scn.sap.com/community/lumira/blog/2015/11/09/map-your-data-on-a-3d-world!
 
